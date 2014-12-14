@@ -1,0 +1,8 @@
+[package]
+name="rust-stack"
+version="0.0.1"
+authors=["Dave Bauman <baumandm@gmail.com"]
+license="MIT"
+
+[[bin]]
+name="rust-stack"
