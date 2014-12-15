@@ -67,7 +67,7 @@ impl fmt::Show for Stack {
             None => write!(f, "Null"),
             Some(ref n) => write!(f, "{}", elements_to_str(&**n))
         }
-        
+
     }
 }
 
@@ -92,5 +92,47 @@ mod test {
         let mut stack = Stack::new();
         stack = stack.push(1);
         assert_eq!(true, stack.has_next());
-    }   
+    }
+
+    #[test]
+    fn pop() {
+        let mut stack = Stack::new();
+        stack = stack.push(10);
+        assert_eq!(true, stack.has_next());
+
+        let (stack, val) = stack.pop();
+        assert_eq!(false, stack.has_next());
+        assert_eq!(10i, val);
+    }
+
+    #[test]
+    fn push_pop() {
+        let mut stack = Stack::new();
+        stack = stack.push(0);
+        stack = stack.push(1);
+        stack = stack.push(2);
+        assert_eq!(true, stack.has_next());
+
+        let (stack, val) = stack.pop();
+        assert_eq!(true, stack.has_next());
+        assert_eq!(2, val);
+
+        let (stack, val) = stack.pop();
+        assert_eq!(true, stack.has_next());
+        assert_eq!(1, val);
+
+        let (stack, val) = stack.pop();
+        assert_eq!(false, stack.has_next());
+        assert_eq!(0, val);
+    }
+
+    #[test]
+    fn pop_empty() {
+        let mut stack = Stack::new();
+        assert_eq!(false, stack.has_next());
+
+        let (stack, val) = stack.pop();
+        assert_eq!(false, stack.has_next());
+        assert_eq!(-1, val);
+    }
 }
