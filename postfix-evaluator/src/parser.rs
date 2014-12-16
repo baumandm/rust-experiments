@@ -41,7 +41,7 @@ pub fn parse(input: &str) -> ParserResult {
             "%" => {
                 let b: f64 = vec.pop().unwrap();
                 let a: f64 = vec.pop().unwrap();
-                vec.push(a.rem(&b));
+                vec.push(a.rem(b));
             },
             _ => {
                 // Number
