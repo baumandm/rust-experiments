@@ -1,0 +1,17 @@
+[package]
+name="particles"
+version="0.0.1"
+authors=["Dave Bauman <baumandm@gmail.com"]
+license="MIT"
+
+[[bin]]
+name="particles"
+
+[dependencies]
+time = "*"
+
+[dependencies.gl_generator]
+git = "https://github.com/bjz/gl-rs"
+
+[dependencies.glfw]
+git = "https://github.com/bjz/glfw-rs.git"
