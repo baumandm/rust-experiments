@@ -53,7 +53,7 @@ struct Particle {
 static WINDOW_WIDTH: u32 = 800;
 static WINDOW_HEIGHT: u32 = 600;
 
-static MAX_PARTICLES: uint = 10000;
+static MAX_PARTICLES: uint = 20000;
 static MAX_LIFE: f32 = 2.5;
 static PARTICLE_SIZE: f32 = 1.5;
 
@@ -126,7 +126,7 @@ fn main() {
 
 fn create_new_particle() -> Particle {
     let angle: f32 = task_rng().gen_range(0.0, 360.0);
-    let v: f32 = task_rng().gen_range(0.1, 1.0);
+    let v: f32 = task_rng().gen_range(0.1, 1.1);
 
     let timespec = time::get_time();
     let millis = timespec.nsec as f32 / 1000.0 / 1000.0;
