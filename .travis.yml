@@ -1,0 +1,11 @@
+language: rust
+
+rust:
+  - 0.13.0
+  - nightly
+env:
+  - TEST_DIR=rust-stack
+  - TEST_DIR=postfix-evaluator
+  - TEST_DIR=particles
+
+script: cd $TEST_DIR && cargo build --verbose && cargo test --verbose
