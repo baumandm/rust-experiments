@@ -6,7 +6,6 @@ rust:
 env:
   - TEST_DIR=rust-stack
   - TEST_DIR=postfix-evaluator
-  - TEST_DIR=particles
   - TEST_DIR=bloom
 
 script: cd $TEST_DIR && cargo build --verbose && cargo test --verbose
