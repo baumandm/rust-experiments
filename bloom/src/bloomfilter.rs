@@ -1,5 +1,6 @@
 use std::num::Float;
 
+use std::hash::Hash;
 use std::hash::Hasher;
 use std::hash::sip::SipHasher;
 
@@ -33,8 +34,8 @@ impl BloomFilter {
         self.k
     }
 
-    pub fn add (&mut self, value: &str) {
-        let hashes = self.get_hashes(value);
+    pub fn add<T: ToString> (&mut self, value: T) {
+        let hashes = self.get_hashes(value.to_string());
         let buckets = self.buckets.as_mut_slice();
 
         for hash in hashes.iter() {
@@ -42,8 +43,8 @@ impl BloomFilter {
         }
     }
 
-    pub fn test (&self, value: &str) -> bool {
-        let hashes = self.get_hashes(value);
+    pub fn test<T: ToString> (&self, value: T) -> bool {
+        let hashes = self.get_hashes(value.to_string());
 
         for hash in hashes.iter() {
             if self.buckets[*hash] == false {
@@ -54,16 +55,15 @@ impl BloomFilter {
         true
     }
 
-    fn get_hashes (&self, value: &str) -> Vec<uint> {
+    fn get_hashes<T: Hash> (&self, value: T) -> Vec<uint> {
         let mut l: Vec<uint> = Vec::with_capacity(self.m);
 
         let m64 = self.m as u64;
         for i in range(0, self.k) {
-            let hash = SipHasher::new_with_keys(3, 8*i as u64).hash(value) % m64;
+            let hash = SipHasher::new_with_keys(3, 8*i as u64).hash(&value) % m64;
             l.push(hash as uint);
         }
 
-        //println!("Locations: {}", l);
         l
     }
 }
