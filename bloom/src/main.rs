@@ -45,8 +45,6 @@ fn main() {
             },
             _ => println!("Available Commands: quit | add <string> | test <string>")
         };
-
-        //println!("Current Stack: {}", my_stack);
     }
 
     println!("Done!");
@@ -65,7 +63,7 @@ fn read_uint(label: &str, default: uint) -> uint {
             return default;
         }
 
-        let num = from_str(trimmed_input);
+        let num = trimmed_input.parse();
         match num {
             None => println!("Invalid input (non-numeric)"),
             Some(i) => return i
